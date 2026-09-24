@@ -6,7 +6,6 @@
 <meta name="description" content="关于家庭教育、主体性、选择与成长的一些思考。">
 <title>孩子长大以后，父母要学会的一件事：把人生慢慢还给孩子</title>
 
-
 <style>
   :root{
     --bg:#fff8f1;
@@ -92,23 +91,44 @@
     border:1px solid #f2ddd5;
     font-size:13px;
   }
-  .share-bar{
-    margin:18px 34px 0;
-    padding:11px 0;
+  .stats{
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    gap:18px;
+    padding:15px 34px;
     color:var(--muted);
-    border-bottom:1px solid var(--line);
     font-size:13px;
+    border-bottom:1px solid var(--line);
   }
-  .share-icons{display:flex;gap:8px}
-  .share-icon{
-    width:30px;height:30px;border-radius:50%;
-    display:grid;place-items:center;
-    background:#fff1f0;color:var(--accent);
-    border:1px solid #f3d3d0;font-weight:700;
+  .stats b{color:#5c4742}
+  .share-btn{
+    margin-left:auto;
+    border:0;
+    border-radius:999px;
+    padding:7px 14px;
+    background:linear-gradient(135deg,var(--accent),var(--purple));
+    color:#fff;
+    font-weight:750;
+    cursor:pointer;
+    box-shadow:0 5px 14px rgba(232,93,117,.22);
   }
+  .share-btn:active{transform:scale(.97)}
+  .toast{
+    position:fixed;
+    left:50%;
+    bottom:28px;
+    transform:translate(-50%,20px);
+    opacity:0;
+    pointer-events:none;
+    background:rgba(48,42,42,.94);
+    color:#fff;
+    padding:10px 17px;
+    border-radius:999px;
+    font-size:14px;
+    transition:.22s;
+    z-index:99;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
   .meta{
     margin:32px 34px 10px;
     color:var(--accent);
@@ -167,6 +187,47 @@
     text-align:center;
   }
   strong{color:#d34f68}
+  .comments{
+    margin:45px 34px 0;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+  }
+  .comments h3{
+    margin:0 0 20px;
+    font-size:20px;
+    color:#302a2a;
+  }
+  .comment{
+    padding:15px 0;
+    border-bottom:1px solid #f5eafe;
+  }
+  .comment-head{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    font-size:14px;
+    font-weight:700;
+  }
+  .dot{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    color:#fff;
+    font-size:12px;
+    background:linear-gradient(135deg,var(--accent),var(--purple));
+  }
+  .comment p{
+    margin:7px 0 0 39px;
+    font-size:14px;
+    color:#5e5250;
+    line-height:1.75;
+  }
+  .comment small{
+    margin-left:39px;
+    color:#a39591;
+  }
   .article-end{
     margin:50px 34px 0;
     padding:28px 0 46px;
@@ -179,8 +240,8 @@
     .page{width:100%;margin:0;border-radius:0}
     .cover{min-height:280px;padding:34px 24px}
     .author-row{padding-left:22px;padding-right:22px}
-    .read-tip,.share-bar{margin-left:22px;margin-right:22px}
-    .meta,h1,.intro,p,h2,blockquote,.highlight,.article-end{
+    .read-tip,.stats{margin-left:22px;margin-right:22px;padding-left:0;padding-right:0}
+    .meta,h1,.intro,p,h2,blockquote,.highlight,.comments,.article-end{
       margin-left:22px;margin-right:22px;
     }
     p{font-size:16px}
@@ -206,12 +267,12 @@
     阅读提示：本文约 7 分钟读完。关于家庭教育、成长与主体性的一些思考。
   </div>
 
-  <div class="share-bar">
-    <span>欢迎阅读 · 欢迎思考</span>
-    <div class="share-icons" aria-label="分享">
-      <span class="share-icon">↗</span>
-      <span class="share-icon">⋯</span>
-    </div>
+  <div class="stats">
+    <span>阅读 <b>9,520</b></span>
+    <span>点赞 <b>4,210</b></span>
+    <span>收藏 <b>1,532</b></span>
+    <span>分享 <b>618</b></span>
+    <button class="share-btn" id="shareBtn" type="button">↗ 分享</button>
   </div>
 
   <div class="meta">关于家庭教育与成长的一些思考</div>
@@ -627,7 +688,62 @@
     也是一个孩子真正长大的开始。
   </p>
 
+  <div class="comments">
+    <h3>评论区</h3>
+
+    <div class="comment">
+      <div class="comment-head"><span class="dot">林</span>林野</div>
+      <p>看到“学会听孩子把理由讲完”特别有同感。很多时候我们急于给建议，反而关上了交流的大门。</p>
+      <small>👍 728 回复 24</small>
+    </div>
+
+    <div class="comment">
+      <div class="comment-head"><span class="dot">清</span>清风</div>
+      <p>写得真好，特别是关于“主体性”的解释。尊重孩子不代表放任，而是让他学会为自己的选择负责。</p>
+      <small>👍 512 回复 15</small>
+    </div>
+
+    <div class="comment">
+      <div class="comment-head"><span class="dot">安</span>安然</div>
+      <p>“允许孩子和父母拥有不同的人生”，做到这一点确实需要父母极大的修养和勇气。</p>
+      <small>👍 890 回复 33</small>
+    </div>
+
+    <div class="comment">
+      <div class="comment-head"><span class="dot">C</span>Chen</div>
+      <p>转给父母看了，有时候跨代沟通最需要的就是这种互相理解的视角。</p>
+      <small>👍 405 回复 11</small>
+    </div>
+  </div>
+
   <div class="article-end">— End —</div>
 </main>
+
+<div class="toast" id="toast">链接已复制</div>
+
+<script>
+(function(){
+  const btn = document.getElementById('shareBtn');
+  const toast = document.getElementById('toast');
+  if(!btn) return;
+  btn.addEventListener('click', async function(){
+    const textToCopy = '【孩子长大以后，父母要学会的一件事：把人生慢慢还给孩子】' + window.location.href;
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+    } catch(e) {
+      const ta = document.createElement('textarea');
+      ta.value = textToCopy;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 1800);
+  });
+})();
+</script>
 </body>
 </html>
