@@ -94,25 +94,56 @@
   .stats{
     display:flex;
     align-items:center;
-    gap:18px;
+    gap:14px;
     padding:15px 34px;
     color:var(--muted);
     font-size:13px;
     border-bottom:1px solid var(--line);
+    flex-wrap:wrap;
   }
   .stats b{color:#5c4742}
-  .share-btn{
+  .action-btns{
     margin-left:auto;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .action-btn{
+    border:1px solid #f0d0c8;
+    border-radius:999px;
+    padding:6px 13px;
+    background:#fff;
+    color:#6e5853;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition:all .2s ease;
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+  }
+  .action-btn:hover{
+    background:#fff0e8;
+    color:var(--accent);
+    border-color:#f5b8c3;
+  }
+  .action-btn.active{
+    background:linear-gradient(135deg, #ffe0e4, #f3e8ff);
+    color:var(--accent);
+    border-color:var(--accent);
+    font-weight:700;
+  }
+  .share-btn{
     border:0;
     border-radius:999px;
-    padding:7px 14px;
+    padding:7px 15px;
     background:linear-gradient(135deg,var(--accent),var(--purple));
     color:#fff;
     font-weight:750;
     cursor:pointer;
     box-shadow:0 5px 14px rgba(232,93,117,.22);
   }
-  .share-btn:active{transform:scale(.97)}
+  .action-btn:active, .share-btn:active{transform:scale(.95)}
   .toast{
     position:fixed;
     left:50%;
@@ -224,9 +255,40 @@
     color:#5e5250;
     line-height:1.75;
   }
-  .comment small{
+  .comment-footer{
     margin-left:39px;
+    margin-top:6px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    font-size:13px;
     color:#a39591;
+  }
+  .like-btn{
+    background:none;
+    border:none;
+    padding:2px 6px;
+    margin-left:-6px;
+    border-radius:6px;
+    color:#a39591;
+    font-size:13px;
+    cursor:pointer;
+    transition:all .18s ease;
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+  }
+  .like-btn:hover{
+    background:#fff0e8;
+    color:var(--accent);
+  }
+  .like-btn.liked{
+    color:var(--accent);
+    font-weight:700;
+    background:#ffe7e9;
+  }
+  .like-btn:active{
+    transform:scale(.92);
   }
   .article-end{
     margin:50px 34px 0;
@@ -241,6 +303,7 @@
     .cover{min-height:280px;padding:34px 24px}
     .author-row{padding-left:22px;padding-right:22px}
     .read-tip,.stats{margin-left:22px;margin-right:22px;padding-left:0;padding-right:0}
+    .action-btns{margin-left:0;width:100%;justify-content:flex-end;margin-top:6px}
     .meta,h1,.intro,p,h2,blockquote,.highlight,.comments,.article-end{
       margin-left:22px;margin-right:22px;
     }
@@ -269,10 +332,16 @@
 
   <div class="stats">
     <span>阅读 <b>9,520</b></span>
-    <span>点赞 <b>4,210</b></span>
-    <span>收藏 <b>1,532</b></span>
     <span>分享 <b>618</b></span>
-    <button class="share-btn" id="shareBtn" type="button">↗ 分享</button>
+    <div class="action-btns">
+      <button class="action-btn" id="articleLikeBtn" type="button">
+        👍 点赞 <b id="articleLikeCount">4,210</b>
+      </button>
+      <button class="action-btn" id="articleFavBtn" type="button">
+        ⭐ 收藏 <b id="articleFavCount">1,532</b>
+      </button>
+      <button class="share-btn" id="shareBtn" type="button">↗ 分享</button>
+    </div>
   </div>
 
   <div class="meta">关于家庭教育与成长的一些思考</div>
@@ -664,7 +733,7 @@
 
   <p>
     父母可以陪他走很长一段路，可以提醒他哪里有危险，可以在他跌倒的时候扶他起来，
-    可以在他迷茫的时候给他建议。
+    可以在他迷茫的时候给你建议。
   </p>
 
   <p>
@@ -694,54 +763,134 @@
     <div class="comment">
       <div class="comment-head"><span class="dot">林</span>林野</div>
       <p>看到“学会听孩子把理由讲完”特别有同感。很多时候我们急于给建议，反而关上了交流的大门。</p>
-      <small>👍 728 回复 24</small>
+      <div class="comment-footer">
+        <button class="like-btn" type="button">👍 <span class="like-count">728</span></button>
+        <span>回复 24</span>
+      </div>
     </div>
 
     <div class="comment">
       <div class="comment-head"><span class="dot">清</span>清风</div>
       <p>写得真好，特别是关于“主体性”的解释。尊重孩子不代表放任，而是让他学会为自己的选择负责。</p>
-      <small>👍 512 回复 15</small>
+      <div class="comment-footer">
+        <button class="like-btn" type="button">👍 <span class="like-count">512</span></button>
+        <span>回复 15</span>
+      </div>
     </div>
 
     <div class="comment">
       <div class="comment-head"><span class="dot">安</span>安然</div>
       <p>“允许孩子和父母拥有不同的人生”，做到这一点确实需要父母极大的修养和勇气。</p>
-      <small>👍 890 回复 33</small>
+      <div class="comment-footer">
+        <button class="like-btn" type="button">👍 <span class="like-count">890</span></button>
+        <span>回复 33</span>
+      </div>
     </div>
 
     <div class="comment">
       <div class="comment-head"><span class="dot">C</span>Chen</div>
       <p>转给父母看了，有时候跨代沟通最需要的就是这种互相理解的视角。</p>
-      <small>👍 405 回复 11</small>
+      <div class="comment-footer">
+        <button class="like-btn" type="button">👍 <span class="like-count">405</span></button>
+        <span>回复 11</span>
+      </div>
     </div>
   </div>
 
   <div class="article-end">— End —</div>
 </main>
 
-<div class="toast" id="toast">链接已复制</div>
+<div class="toast" id="toast">提示信息</div>
 
 <script>
 (function(){
-  const btn = document.getElementById('shareBtn');
+  // Toast 通用提示函数
   const toast = document.getElementById('toast');
-  if(!btn) return;
-  btn.addEventListener('click', async function(){
-    const textToCopy = '【孩子长大以后，父母要学会的一件事：把人生慢慢还给孩子】' + window.location.href;
-    try {
-      await navigator.clipboard.writeText(textToCopy);
-    } catch(e) {
-      const ta = document.createElement('textarea');
-      ta.value = textToCopy;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      ta.remove();
-    }
+  function showToast(msg) {
+    if(!toast) return;
+    toast.textContent = msg;
     toast.classList.add('show');
-    setTimeout(()=>toast.classList.remove('show'), 1800);
+    setTimeout(() => toast.classList.remove('show'), 1800);
+  }
+
+  // 数字加减辅助方法
+  function parseCount(str) {
+    return parseInt(str.replace(/,/g, ''), 10) || 0;
+  }
+  function formatCount(num) {
+    return num.toLocaleString('en-US');
+  }
+
+  // 1. 文章点赞按钮互动
+  const articleLikeBtn = document.getElementById('articleLikeBtn');
+  const articleLikeCount = document.getElementById('articleLikeCount');
+  if (articleLikeBtn && articleLikeCount) {
+    articleLikeBtn.addEventListener('click', function() {
+      let count = parseCount(articleLikeCount.textContent);
+      if (this.classList.contains('active')) {
+        this.classList.remove('active');
+        articleLikeCount.textContent = formatCount(count - 1);
+      } else {
+        this.classList.add('active');
+        articleLikeCount.textContent = formatCount(count + 1);
+      }
+    });
+  }
+
+  // 2. 文章收藏按钮互动
+  const articleFavBtn = document.getElementById('articleFavBtn');
+  const articleFavCount = document.getElementById('articleFavCount');
+  if (articleFavBtn && articleFavCount) {
+    articleFavBtn.addEventListener('click', function() {
+      let count = parseCount(articleFavCount.textContent);
+      if (this.classList.contains('active')) {
+        this.classList.remove('active');
+        articleFavCount.textContent = formatCount(count - 1);
+        showToast('已取消收藏');
+      } else {
+        this.classList.add('active');
+        articleFavCount.textContent = formatCount(count + 1);
+        showToast('已加入收藏');
+      }
+    });
+  }
+
+  // 3. 分享按钮复制
+  const shareBtn = document.getElementById('shareBtn');
+  if(shareBtn) {
+    shareBtn.addEventListener('click', async function(){
+      const textToCopy = '【孩子长大以后，父母要学会的一件事：把人生慢慢还给孩子】' + window.location.href;
+      try {
+        await navigator.clipboard.writeText(textToCopy);
+      } catch(e) {
+        const ta = document.createElement('textarea');
+        ta.value = textToCopy;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      }
+      showToast('链接已复制');
+    });
+  }
+
+  // 4. 评论区点赞互动
+  document.querySelectorAll('.like-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      const countSpan = this.querySelector('.like-count');
+      let count = parseCount(countSpan.textContent);
+      const isLiked = this.classList.contains('liked');
+
+      if (isLiked) {
+        this.classList.remove('liked');
+        countSpan.textContent = formatCount(count - 1);
+      } else {
+        this.classList.add('liked');
+        countSpan.textContent = formatCount(count + 1);
+      }
+    });
   });
 })();
 </script>
